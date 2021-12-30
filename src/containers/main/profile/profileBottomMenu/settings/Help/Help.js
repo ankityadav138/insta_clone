@@ -1,23 +1,26 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native'
-import arrowIcon from '../../../../../res/images/rightarrow.png'
+import arrowIcon from '../../../../../../res/images/rightarrow.png'
+
 const data = [
     {
         id: 1,
-        text: "Light "
+        text: "Report a problem"
     },
     {
         id: 2,
-        text: "Dark"
+        text: "Help Centre"
     },
     {
         id: 3,
-        text: "System Default"
+        text: "Privacy and security help"
     },
 ]
-function Theme() {
+
+function Help() {
     return (
         <View style={styles.container}>
+
             <FlatList
                 data={data}
                 keyExtractor={data.id}
@@ -34,7 +37,7 @@ function Theme() {
     )
 }
 
-export default Theme;
+export default Help;
 
 const styles = StyleSheet.create({
     container: {

@@ -1,21 +1,26 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native'
-import arrowIcon from '../../../../../res/images/rightarrow.png'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+
 const data = [
     {
         id: 1,
-        text: "Light "
+        text: "App updates"
     },
     {
         id: 2,
-        text: "Dark"
+        text: "Data Policy"
     },
     {
         id: 3,
-        text: "System Default"
+        text: "Terms of Use"
+    },
+    {
+        id: 4,
+        text: "Open-source libraries"
     },
 ]
-function Theme() {
+
+function About() {
     return (
         <View style={styles.container}>
             <FlatList
@@ -25,7 +30,7 @@ function Theme() {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate(item.text)} style={styles.contents}>
                             <Text style={styles.fontstyle}>{item.text}</Text>
-                            <Image source={arrowIcon} style={{ width: 15, height: 15, tintColor: "black" }} />
+
                         </TouchableOpacity>
                     </View>
                 }
@@ -34,7 +39,7 @@ function Theme() {
     )
 }
 
-export default Theme;
+export default About;
 
 const styles = StyleSheet.create({
     container: {
@@ -51,6 +56,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginVertical: 13,
         marginHorizontal: 10,
-        justifyContent: "space-between"
+
     },
 })

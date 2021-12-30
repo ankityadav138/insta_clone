@@ -1,23 +1,41 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native'
-import arrowIcon from '../../../../../res/images/rightarrow.png'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+
 const data = [
     {
         id: 1,
-        text: "Light "
+        text: "Promotion payments"
     },
     {
         id: 2,
-        text: "Dark"
+        text: "Branded content"
     },
     {
         id: 3,
-        text: "System Default"
+        text: "Branded content ads"
     },
+    {
+        id: 3,
+        text: "Saved replies"
+    },
+    {
+        id: 4,
+        text: "Frequently asked questions"
+    },
+    {
+        id: 5,
+        text: "Minimum age"
+    },
+    {
+        id: 6,
+        text: "Monetisation status"
+    }
 ]
-function Theme() {
+
+function Creator() {
     return (
         <View style={styles.container}>
+
             <FlatList
                 data={data}
                 keyExtractor={data.id}
@@ -25,21 +43,21 @@ function Theme() {
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate(item.text)} style={styles.contents}>
                             <Text style={styles.fontstyle}>{item.text}</Text>
-                            <Image source={arrowIcon} style={{ width: 15, height: 15, tintColor: "black" }} />
                         </TouchableOpacity>
                     </View>
                 }
             />
+
         </View>
     )
 }
 
-export default Theme;
+export default Creator;
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "column",
         flex: 1,
+        flexDirection: "column",
         backgroundColor: "white"
     },
     fontstyle: {
@@ -50,7 +68,6 @@ const styles = StyleSheet.create({
         top: 10,
         flexDirection: "row",
         marginVertical: 13,
-        marginHorizontal: 10,
-        justifyContent: "space-between"
+        marginHorizontal: 10
     },
 })

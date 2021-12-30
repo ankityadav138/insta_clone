@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function Account() {
+function EmailandSms() {
     return (
         <View style={styles.container}>
-            <Text>Account</Text>
+            <Text>Email and SMS</Text>
         </View>
     )
 }
 
-export default Account;
+export default EmailandSms;
 
 const styles = StyleSheet.create({
     container: {

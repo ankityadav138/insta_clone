@@ -8,6 +8,7 @@ import qrcode from '../../../../res/images/qrcode.png'
 import addfrinds from '../../../../res/images/addfriends.png'
 import closefrnd from '../../../../res/images/closefrnd.png'
 import love from '../../../../res/images/love.png'
+import archiveIcon from '../../../../res/images/archive.png'
 
 
 
@@ -26,7 +27,7 @@ export default function BottomContent(props) {
 
 
             <TouchableOpacity onPress={() => props.navigation.navigate("archive")} style={styles.contents}>
-                <Image source={settingIcon} style={styles.logoStyle} />
+                <Image source={archiveIcon} style={styles.logoStyle} />
                 <Text style={styles.textStyle}>Archive</Text>
             </TouchableOpacity>
 
@@ -55,7 +56,7 @@ export default function BottomContent(props) {
             </TouchableOpacity>
 
 
-            <TouchableOpacity onPress={() => props.navigation.navigate("closefriends")} style={styles.contents}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Close friends")} style={styles.contents}>
                 <Image source={addfrinds} style={styles.logoStyle} />
                 <Text style={styles.textStyle}>Close friends</Text>
             </TouchableOpacity>
