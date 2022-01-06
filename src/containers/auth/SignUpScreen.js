@@ -12,35 +12,57 @@ import images from 'res/images';
 import colors from '../../res/colors';
 
 export default function SignUp({ navigation }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUserName] = useState("");
-    const [name, setName] = useState("");
-    const [loading, setLoading] = useState("");
 
-    async function signUp() {
-        let item = { email, password, username, name }
-        console.log(item);
+    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("")
+    const [fullname, setFullname] = useState("")
+    console.log(email)
 
-        let result = await fetch('http://188.166.189.237:3001/api/v1/users/signup', {
-            method: 'POST',
-            body: JSON.stringify(item),
+
+
+
+
+
+
+    const signUp = async () => {
+        // setLoading(true)
+        await fetch("http://188.166.189.237:3001/api/v1/users/signup", {
+            method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Basic Og==",
-                "Accept": "application/json"
-            }
-        })
-        setLoading(true)
-        result = await result.json()
-        console.log("result", result);
-        setLoading(false)
-        if (result.status == "OK") {
-            navigation.navigate("MainNavigator")
-        }
-        else (
-            alert("Please provide correct details")
-        )
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                username,
+                fullname
+            })
+        }).then(res => res.json())
+            .then((result) => {
+                console.log(result)
+                try {
+                    if (result.message === "Username is already taken") {
+                        setLoading(false)
+                        alert(result.message)
+                    } else if (result.message === "Email already taken") {
+                        setLoading(false)
+                        alert(result.message)
+                    } else if (result.message === "Password should be minimum of 8 characters") {
+                        setLoading(false)
+                        alert(alert.message)
+                    } else {
+                        setLoading(false)
+                        // alert(result.message)
+                        navigation.navigate("Login")
+                    }
+                } catch (err) {
+                    console.log(err)
+                    alert("There is some problem with server, please try after sometime")
+                }
+            })
     }
 
     if (loading) {
@@ -80,7 +102,7 @@ export default function SignUp({ navigation }) {
                     style={Styles.userNameInput}
                     placeholder="username"
                     placeholderTextColor={colors.textFaded2}
-                    onChangeText={(text) => setUserName(text)}
+                    onChangeText={(text) => setUsername(text)}
                 />
             </View>
             <View style={Styles.userNameContainer}>
@@ -88,7 +110,7 @@ export default function SignUp({ navigation }) {
                     style={Styles.userNameInput}
                     placeholder="fullname"
                     placeholderTextColor={colors.textFaded2}
-                    onChangeText={(text) => setName(text)}
+                    onChangeText={(text) => setFullname(text)}
                 />
             </View>
             <View style={Styles.forgotPasswordContainer}>

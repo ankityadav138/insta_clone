@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 function Notification() {
 
+    const navigation = useNavigation()
 
     const data = [
         {
@@ -47,7 +49,6 @@ function Notification() {
             </TouchableOpacity>
 
             <View style={{ flexDirection: "column", top: 50 }}>
-
                 <FlatList
                     data={data}
                     keyExtractor={data.id}
@@ -65,17 +66,15 @@ function Notification() {
                 <Text style={{ fontWeight: "bold", fontSize: 16, left: 15, top: "15%" }}>Other notification types</Text>
 
                 <View style={{ left: 15, top: "15%", flexDirection: "column", marginVertical: 15 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Email and SMS notifications")}>
                         <Text style={{ fontSize: 16, marginVertical: 10 }}>Email and SMS</Text>
                     </TouchableOpacity>
 
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Shopping")}>
                         <Text style={{ fontSize: 16, marginVertical: 10 }}>Shopping</Text>
                     </TouchableOpacity>
                 </View>
-
-
             </View>
 
         </View>

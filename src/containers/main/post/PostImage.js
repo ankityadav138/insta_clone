@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, Dimensions} from 'react-native';
+import { Image, StyleSheet, Dimensions } from 'react-native';
 
-export default function PostImage({post}) {
-  return <Image source={{uri: post.imgUrl}} style={Styles.postImg} />;
+export default function PostImage({ post }) {
+  // console.log("imagepost", post.image)
+  return <Image source={{ uri: post.image }} style={Styles.postImg} />;
 }
 
 const Styles = StyleSheet.create({

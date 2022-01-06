@@ -13,6 +13,7 @@ import about from '../../../../../res/images/info.png'
 import theme from '../../../../../res/images/paint.png'
 import meta from '../../../../../res/images/meta.png'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const data = [
     {
@@ -73,6 +74,13 @@ function SettingScreen() {
 
     const navigation = useNavigation()
 
+    const logOut = async () => {
+        // var token = await AsyncStorage.getItem('token')
+        // console.log(token)
+        await AsyncStorage.removeItem('token')
+        navigation.navigate("Login")
+    }
+
 
     return (
         <ScrollView style={styles.container}>
@@ -131,7 +139,7 @@ function SettingScreen() {
             </TouchableOpacity>
 
 
-            <TouchableOpacity style={{ marginHorizontal: 23, marginVertical: 10 }}>
+            <TouchableOpacity onPress={() => logOut()} style={{ marginHorizontal: 23, marginVertical: 10 }}>
                 <Text style={{ color: "skyblue", fontSize: 16 }}>Log out</Text>
             </TouchableOpacity>
 

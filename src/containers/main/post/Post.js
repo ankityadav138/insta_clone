@@ -7,7 +7,7 @@ import PostText from './PostText';
 import PostComments from './PostComments';
 import PostPublishDate from './PostPublishDate';
 
-export default function Post({post}) {
+export default function Post({ post }) {
   return (
     <React.Fragment>
       <PostHeader post={post} />

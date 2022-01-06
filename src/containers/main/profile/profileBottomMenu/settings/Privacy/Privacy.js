@@ -114,13 +114,11 @@ function Privacy() {
 
             <Text style={{ fontSize: 16, fontWeight: "bold", left: 10, top: "17%" }}>Interaction</Text>
             <FlatList
-
+                style={{ height: 800, }}
                 data={interaction}
                 keyExtractor={interaction.id}
                 renderItem={({ item }) =>
                     <View>
-
-
                         <TouchableOpacity onPress={() => navigation.navigate(item.text)} style={styles.contents}>
                             <Image source={item.icon} style={styles.iconstyle} />
                             <Text style={styles.fontstyle}>{item.text}</Text>
@@ -144,7 +142,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginVertical: 13,
         marginHorizontal: 20,
-        top: "10%"
+        top: 100,
+        backgroundColor: "green"
+
     },
     iconstyle: {
         height: 24,

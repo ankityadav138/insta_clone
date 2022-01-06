@@ -20,7 +20,7 @@ export default function BottomContent(props) {
     return (
         <View style={styles.panel}>
 
-            <TouchableOpacity onPress={() => props.navigation.navigate("settingScreen")} style={styles.contents}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("SettingNavigator")} style={styles.contents}>
                 <Image source={settingIcon} style={styles.logoStyle} />
                 <Text style={styles.textStyle}>Settings</Text>
             </TouchableOpacity>
@@ -38,7 +38,7 @@ export default function BottomContent(props) {
             </TouchableOpacity>
 
 
-            <TouchableOpacity onPress={() => props.navigation.navigate("youractivity")} style={styles.contents}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Your activity")} style={styles.contents}>
                 <Image source={youractivity} style={styles.logoStyle} />
                 <Text style={styles.textStyle}>Your activity</Text>
             </TouchableOpacity>
@@ -50,7 +50,7 @@ export default function BottomContent(props) {
             </TouchableOpacity>
 
 
-            <TouchableOpacity onPress={() => props.navigation.navigate("saved")} style={styles.contents}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Saved")} style={styles.contents}>
                 <Image source={savedIcon} style={styles.logoStyle} />
                 <Text style={styles.textStyle}>Saved</Text>
             </TouchableOpacity>

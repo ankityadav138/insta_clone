@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import Post from '../post/Post'
 import colors from '../../../res/colors';
 // import images from 'res/images';
 import StoryContainer from '../story/StoryContainer';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_API_URL } from '@env';
 export default function homeScreen({ navigation }) {
+  const storyOnPress = () => navigation.navigate('StoryScreen');
+
+  const [posts, setPosts] = useState([])
+
+
   const data = [
     { key: '1' },
     { key: '2' },
@@ -19,7 +25,35 @@ export default function homeScreen({ navigation }) {
     { key: '10' },
   ];
 
-  const storyOnPress = () => navigation.navigate('StoryScreen');
+  const getAllPost = async () => {
+    let token = await AsyncStorage.getItem('token')
+    await fetch(`${BASE_API_URL}users/feed`, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    }).then(res => res.json())
+      .then((response) => {
+        try {
+          if (response.status === "OK") {
+            var data = response.data;
+            for (let index = 0; index < data.length; index++) {
+              const element = data[index];
+              console.log(element.image)
+              setPosts(element)
+            }
+          }
+        } catch (err) {
+          console.log(err)
+        }
+      })
+  }
+
+  useEffect(() => {
+    getAllPost()
+  }, [])
 
   const post = {
     userName: 'John Doe',
@@ -79,7 +113,7 @@ export default function homeScreen({ navigation }) {
           />
         </View>
         */
-        <Post post={post} />
+        <Post post={posts} />
       )}
     />
   );

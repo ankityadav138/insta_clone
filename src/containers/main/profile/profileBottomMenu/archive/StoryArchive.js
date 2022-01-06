@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+import StoryContainer from '../../../story/StoryContainer';
 
 const data = [
     { key: '1' },
@@ -38,7 +39,11 @@ function Test() {
     );
 }
 
-export default function StoryArchive() {
+export default function StoryArchive(navigation) {
+
+
+    const storyOnPress = () => navigation.navigate('StoryScreen');
+
     return (
         <FlatList
             data={data}

@@ -5,48 +5,58 @@ import {
     TextInput,
     StyleSheet,
     Image,
-    ActivityIndicator,
+
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import images from '../../res/images';
-import colors from '../../res/colors'
+import colors from '../../res/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ActivityIndicators from '../../components/ActivityIndicators';
+
 
 function LogScreen({ navigation }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false)
 
-    async function LogIn() {
-        console.log(email, password)
-        let item = { email, password }
-        let result = await fetch('http://188.166.189.237:3001/api/v1/users/login', {
-            method: 'POST',
+    const [loading, setloading] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+    const logIn = async () => {
+        setloading(true)
+        await fetch("http://188.166.189.237:3001/api/v1/users/login", {
+            method: "POST",
             headers: {
-                "Authorization": "Basic Og==",
-                "Content-Type": "application/json",
-                "Accept": "applicaton/json"
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
-        });
-        setLoading(true)
-        result = await result.json();
-        console.log("result", result)
-        setLoading(false)
-        if (result.status == "OK") {
-            navigation.navigate("MainNavigator")
-        }
-        else {
-            alert("Please fill the Login Details")
-        }
+            body: JSON.stringify({
+                email,
+                password
+            })
+        }).then(res => res.json())
+            .then(async (result) => {
+                try {
+                    if (result.status === "OK" || result.code === 200) {
+                        let accessToken = result.data.accessToken;
+                        await AsyncStorage.setItem('token', accessToken)
+                        setloading(false)
+                        navigation.navigate("MainNavigator")
+                    } else {
+                        setloading(false)
+                        alert(result.message)
+                    }
+                } catch (err) {
+                    console.log(err)
+                    alert("There is problem with server , please login after somtime")
+                }
+            })
     }
-
     if (loading) {
         return (
-            <View style={{ flex: 1, backgroundColor: "black", justifyContent: "center", alignItems: "center" }}>
-                <ActivityIndicator size="small" color="white" />
-            </View>
+            <ActivityIndicators />
         )
     }
+
 
     return (
         <View style={Styles.container}>
@@ -70,12 +80,12 @@ function LogScreen({ navigation }) {
                     placeholderTextColor={colors.textFaded2}
                 />
             </View>
-            <View style={Styles.forgotPasswordContainer}>
-                <TouchableOpacity>
+            <View style={Styles.forgotPasswordContainer} >
+                <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
                     <Text style={Styles.forgotPasswordText}>Forgot password?</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={Styles.loginContainer} onPress={LogIn}>
+            <TouchableOpacity style={Styles.loginContainer} onPress={logIn}>
                 <Text style={Styles.loginText}>Log In</Text>
             </TouchableOpacity>
             <View

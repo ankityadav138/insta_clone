@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import palette from 'res/palette';
 import images from '../../../res/images';
 import colors from '../../../res/colors';
 import PostImage from './PostImage';
 
-export default function PostHeader({post}) {
+export default function PostHeader({ post }) {
   return (
     <View style={Styles.container}>
       <View style={Styles.nameContainer}>
         <Image
-          source={{uri: 'https://picsum.photos/300'}}
+          source={{ uri: 'https://picsum.photos/300' }}
           style={Styles.personImage}
         />
         <View>
